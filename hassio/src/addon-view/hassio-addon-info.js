@@ -107,7 +107,7 @@ class HassioAddonInfo extends EventsMixin(PolymerElement) {
             <img src="/api/hassio/addons/[[addonSlug]]/logo">
           </a>
         </template>
-        <template is="dom-if" if="[[addon.version]]"> // not only show when add-on installed, but only if accesss to folders is required
+        <template is="dom-if" if="[[addon.version]]"> // only show when add-on requires accesss to folders
 		  <table> // maybe don't use table, access-property is best aligned with toggle-buttons below
             <tbody><tr>
               <th>Folder</th>
