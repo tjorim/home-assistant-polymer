@@ -107,6 +107,29 @@ class HassioAddonInfo extends EventsMixin(PolymerElement) {
             <img src="/api/hassio/addons/[[addonSlug]]/logo">
           </a>
         </template>
+        <template is="dom-if" if="[[addon.version]]"> // not only show when add-on installed, but only if accesss to folders is required
+		  <table> // maybe don't use table, access-property is best aligned with toggle-buttons below
+            <tbody><tr>
+              <th>Folder</th>
+              <th>Access</th>
+            </tr>
+            <template is="dom-repeat" items="[[config]]"> // set correct value for list of folders
+              <tr>
+                <td>
+                  [[item.container]] // get name of folder, e.g. config, ssl...
+                </td>
+                <td>
+				  <template is="dom-if" if="[[isRunning]]"> // if access is ro
+					Read-only
+				  </template>
+				  <template is="dom-if" if="[[!isRunning]]"> // if access is rw
+					Full access
+				  </template>
+                </td>
+              </tr>
+            </template>
+          </tbody></table>
+        </template>
         <template is="dom-if" if="[[addon.version]]">
           <div class="state">
             <div>Start on boot</div>
